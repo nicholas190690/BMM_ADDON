@@ -1,0 +1,224 @@
+<div class="ticket">
+	<p class="centered btm-border"><br>PT REJOSO MANIS INDO<br>TIKET TIMBANG</p>
+			
+    <p class="centered">
+		<?php 
+			#$genqr	= "http://api.rejosomanisindo.com:6026/qrservices/getqr/generate?ident=2-".$recs['harvesting_ticket'];
+			$genqr	= "http://api.rejosomanisindo.com:6026/qrservices/getqr/generate?ident=2-".$recs['harvesting_ticket'];
+		?>
+		<!-- width="70px;" -->
+		<img src="<?='/qrservices/getqr/generateMobile?ident=2-'.$recs['harvesting_ticket'];?>" alt="Logo">
+		
+		<br>2-<?php echo $recs['harvesting_ticket']; ?></p>
+    <table>
+        <tbody>
+            <tr>
+                <td class="customlabel">&nbsp;Nomor Kontrak</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo $recs['contract_id']; ?></td>
+			</tr>
+			<tr>
+                <td class="customlabel">&nbsp;Tipe Petani</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo $recs['TipeKebun']; ?></td>
+			</tr>
+			<tr>
+                <td class="customlabel">&nbsp;Tanggal</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo date('d-M-Y',strtotime($recs['tgl_spta'])); ?></td>
+			</tr>
+			<tr>
+                <td class="customlabel">&nbsp;Register</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo $recs['farmer_id']; ?></td>
+			</tr>
+            <tr>
+                <td class="customlabel">&nbsp;Pemilik</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo $recs['farmer_name']; ?></td>
+			</tr>
+			<tr>
+                <td class="customlabel">&nbsp;Kecamatan</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo $recs['district']; ?></td>
+			</tr>
+			<tr>
+                <td class="customlabel">&nbsp;Desa</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo $recs['village']; ?></td>
+			</tr>
+			<tr>
+                <td class="customlabel">&nbsp;Kop Induk</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo $recs['business_partner']; ?></td>
+			</tr>
+			<tr>
+                <td class="customlabel">&nbsp;Pos Pantau</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo $recs['pos_pantau']; ?></td>
+			</tr>
+			<tr>
+                <td class="customlabel">&nbsp;Brix</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo $recs['brix']; ?></td>
+			</tr>
+			<tr>
+                <td class="customlabel">&nbsp;Brix SCG</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo $recs['RMI_BRIXSCG']; ?></td>
+			</tr>
+			<?php 
+				$prj_prefix = $recs['RMI_TYPE']; 
+				if(isset($projectdata[$prj_prefix])){
+					$validproject = $projectdata[$prj_prefix];
+					
+					$empl_brix 		= isset($validproject['project_prefix'])
+									?$validproject['emplasemen_point_brix']
+									:0;
+					$checkpoint_brix = isset($validproject['check_point_brix'])
+									?$validproject['check_point_brix']
+									:0;
+					if($checkparking=='Y'){
+						$vproject = isset($validproject['project_name'])
+									?$validproject['project_name']
+									:0;
+						$project = $vproject;			
+						/*if($recs['RMI_BRIXSCG'] >= $empl_brix && $recs['brix'] >= $checkpoint_brix){
+							$project = $vproject;
+						}else{
+							$project = 'REGULER';	
+						}*/
+						
+					}else{
+						$vproject = isset($validproject['project_name'])
+									?$validproject['project_name']
+									:0;	
+						if($recs['brix'] >= $checkpoint_brix){
+							$project = $vproject;
+						}else{
+							$project = 'REGULER';	
+						}
+					}		
+					
+				}
+				
+				/*echo '<pre>';
+				echo $emp_brix.'---'.$cpoint_brix.'<hr>';
+				print_r($projectdata); 
+				echo '</pre>';
+				die('_SKIP_'); 
+				
+				$arremplasemen = ['00020','00019'];
+				$project = 'REGULER';
+				if($recs['RMI_TYPE']=='T'){
+					$project = 'TEBU MANIS';
+					if($checkparking=='Y'){
+						if($recs['RMI_BRIXSCG'] >= 22 && $recs['brix'] >= 22){
+							$project = 'TEBU MANIS';
+						}else{
+							$project = 'REGULER';	
+						}
+					}else{
+						if($recs['brix'] >= 22){
+							$project = 'TEBU MANIS';
+						}else{
+							$project = 'REGULER';	
+						}
+					}					
+				}elseif($recs['RMI_TYPE']=='D'){
+					$project = 'DRONE';
+					if($checkparking=='Y'){
+						if($recs['RMI_BRIXSCG'] >= 24 && $recs['brix'] >= 24){
+							$project = 'DRONE';
+						}else{
+							$project = 'REGULER';	
+						}
+					}else{
+						if($recs['brix'] >= 24){
+							$project = 'DRONE';
+						}else{
+							$project = 'REGULER';	
+						}
+					}					
+				}elseif($recs['RMI_TYPE']=='H'){
+					$project = 'TEBU HIJAU';
+					if($checkparking=='Y'){
+						if($recs['RMI_BRIXSCG'] >= 23 && $recs['brix'] >= 23){
+							$project = 'TEBU HIJAU';
+						}else{
+							$project = 'REGULER';	
+						}
+					}else{
+						if($recs['brix'] >= 23){
+							$project = 'TEBU HIJAU';
+						}else{
+							$project = 'REGULER';	
+						}
+					}
+				}*/
+			?>
+			<tr>
+                <td class="customlabel">&nbsp;Project</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo $project; ?></td>
+			</tr>
+			<tr>
+                <td class="customlabel">&nbsp;Estimasi Tebang</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo $recs['RMI_ESTTEBANG']; ?></td>
+			</tr>
+			<tr>
+                <td class="customlabel">&nbsp;Kode Petak</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo ($recs['RMI_AREAID']=='0')?'-':$recs['RMI_TYPE'].$recs['RMI_AREAID']; ?></td>
+			</tr>
+			<tr>
+                <td class="customlabel">&nbsp;Jatah Ritase</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo number_format($recs['RITASE'],0,'.',','); ?></td>
+			</tr>
+			<tr>
+                <td class="customlabel">&nbsp;Ritase digunakan</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo number_format($recs['RITASEUSED'],0,'.',','); ?></td>
+			</tr>
+			<tr>
+                <td class="customlabel">&nbsp;SPTA Tercetak</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo $recs['TOTALSPTAAREAID']; ?></td>
+			</tr>
+			<tr>
+                <td class="customlabel">&nbsp;Nama Supir</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo $recs['driver']; ?></td>
+			</tr>
+			<tr>
+                <td class="customlabel">&nbsp;Nomor Polisi</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo $recs['police_number']; ?></td>
+			</tr>
+			<tr>
+                <td class="customlabel">&nbsp;Jenis Truck</td>
+                <td class="titikdua">:</td>
+				<td class="customdesc"><?php echo $recs['jenis_truck']; ?></td>
+			</tr>
+        </tbody>
+    </table>
+    <p class="btm-top">
+		&nbsp;Tanggal jam cetak : <?php echo date('d M Y H:i:s'); ?><br>
+		&nbsp;SPTA berlaku bagi register yang tertera dan TIDAK &nbsp;ADA koreksi/Perubahan data
+		<table style="margin-left:180px;">
+			<tr>
+				<td class="centered">Plantation Manager</td>
+			</tr>
+			<tr><td class="centered">&nbsp;</td></tr>
+			<tr>
+				<td class="centered"><img style="width:80px;" src="<?=$this->url->get('img/ttd_manager_onfarm.jpeg')?>"></td>
+			</tr>
+			<tr><td class="centered">&nbsp;</td></tr>
+			<tr><td class="centered">Syahrul Istad</td></tr>
+	    </table>
+	</p>
+</div>
+		
+        

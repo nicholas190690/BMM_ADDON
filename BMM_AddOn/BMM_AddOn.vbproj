@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{967BFDD0-34D8-4FDC-958B-17B925084259}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>BMM_AddOn.My.MyApplication</StartupObject>
+    <RootNamespace>BMM_AddOn</RootNamespace>
+    <AssemblyName>BMM_AddOn</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>BMM_AddOn.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>BMM_AddOn.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logoPT BMM.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\nicho_o9gj1dt\Documents\Visual Studio 2015\Projects\ProjectBudget\ProjectBudget\DLL\bmm\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\nicho_o9gj1dt\Documents\Visual Studio 2015\Projects\ProjectBudget\ProjectBudget\DLL\bmm\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\nicho_o9gj1dt\Documents\Visual Studio 2015\Projects\ProjectBudget\ProjectBudget\DLL\bmm\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\nicho_o9gj1dt\Documents\Visual Studio 2015\Projects\ProjectBudget\ProjectBudget\DLL\bmm\CrystalDecisions.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="EncryptionClassLibrary">
+      <HintPath>Z:\D\KTNScale\KtnScale\bin\Debug\EncryptionClassLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.SAPbobsCOM">
+      <HintPath>obj\x86\Debug\Interop.SAPbobsCOM.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Excel\15.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\Users\nicho_o9gj1dt\Documents\Visual Studio 2015\Projects\CapexPP\CapexPP\bin\x64\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Sap.Data.Hana.v3.5, Version=1.0.120.0, Culture=neutral, PublicKeyToken=0326b8ea63db4bc4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\SAP\hdbclient\ado.net\v3.5\Sap.Data.Hana.v3.5.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="WinSCPnet, Version=1.16.0.16364, Culture=neutral, PublicKeyToken=2271ec4a3c56d0bf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\192.168.1.5\b1_shf\WinSCPnet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Class\Authorization.vb" />
+    <Compile Include="Class\Component.vb" />
+    <Compile Include="Class\ComponentBody.vb" />
+    <Compile Include="Class\Document.vb" />
+    <Compile Include="Class\Language.vb" />
+    <Compile Include="Class\oCaptureCCTV.vb" />
+    <Compile Include="Class\oFunctional.vb" />
+    <Compile Include="Class\oObjectDocument.vb" />
+    <Compile Include="Class\oObjectWa.vb" />
+    <Compile Include="Class\oReport.vb" />
+    <Compile Include="Class\oUser.vb" />
+    <Compile Include="Class\oUserLine.vb" />
+    <Compile Include="Class\oWeighBridge.vb" />
+    <Compile Include="Class\Parameter.vb" />
+    <Compile Include="Class\ParameterText.vb" />
+    <Compile Include="Class\returnMessage.vb" />
+    <Compile Include="Class\Template.vb" />
+    <Compile Include="Class\WhatsAppMessage.vb" />
+    <Compile Include="UI\Form_Find.designer.vb">
+      <DependentUpon>Form_Find.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form_Find.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form_Password.Designer.vb">
+      <DependentUpon>Form_Password.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form_Password.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form_Reporting.Designer.vb">
+      <DependentUpon>Form_Reporting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form_Reporting.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form_WeighBridge.designer.vb">
+      <DependentUpon>Form_WeighBridge.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form_WeighBridge.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Plate.Designer.vb">
+      <DependentUpon>Plate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Plate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form_BaggingToSAP.Designer.vb">
+      <DependentUpon>Form_BaggingToSAP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form_BaggingToSAP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form_ListBagging.Designer.vb">
+      <DependentUpon>Form_ListBagging.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form_ListBagging.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form_ListRaw.Designer.vb">
+      <DependentUpon>Form_ListRaw.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form_ListRaw.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form_ListWB.Designer.vb">
+      <DependentUpon>Form_ListWB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form_ListWB.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form_MasterUser.Designer.vb">
+      <DependentUpon>Form_MasterUser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form_MasterUser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form_RawSugar.Designer.vb">
+      <DependentUpon>Form_RawSugar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form_RawSugar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Config\Application\ApplicationConfig.vb" />
+    <Compile Include="Config\Application\ConfigurationForm.designer.vb">
+      <DependentUpon>ConfigurationForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Config\Application\ConfigurationForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Config\Connection\Connection.vb" />
+    <Compile Include="Config\Connection\HANAConnection.vb" />
+    <Compile Include="Config\Connection\ResultSet.vb" />
+    <Compile Include="Config\Connection\SBOConnection.vb" />
+    <Compile Include="Config\Connection\SQLConnection.vb" />
+    <Compile Include="UI\Utility\CustomMessageBox.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Config\Connection\Queries\HANAVersion.vb" />
+    <Compile Include="Config\Connection\Queries\Queries.vb" />
+    <Compile Include="Config\Connection\Queries\SQLVersion.vb" />
+    <Compile Include="UI\Form_Loading.Designer.vb">
+      <DependentUpon>Form_Loading.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form_Loading.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form_Search.Designer.vb">
+      <DependentUpon>Form_Search.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form_Search.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form_Login.Designer.vb">
+      <DependentUpon>Form_Login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form_Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form_Main.designer.vb">
+      <DependentUpon>Form_Main.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form_Main.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Utility\ConfigModule.vb" />
+    <Compile Include="UI\Utility\Encryption.vb" />
+    <Compile Include="UI\Utility\EncryptionAddOnvb.vb" />
+    <Compile Include="UI\Utility\ModGlobal.vb" />
+    <Compile Include="UI\Utility\Utils.vb" />
+    <Compile Include="XML\ApplicationXMLHandler.vb" />
+    <Compile Include="XML\ConfigXMLParser.vb" />
+    <Compile Include="XML\HANAXMLHandler.vb" />
+    <Compile Include="XML\SBOXMLHandler.vb" />
+    <Compile Include="XML\SQLXMLHandler.vb" />
+    <Compile Include="XML\XMLHandler.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\Application\ConfigurationForm.resx">
+      <DependentUpon>ConfigurationForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form_Find.resx">
+      <DependentUpon>Form_Find.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form_Password.resx">
+      <DependentUpon>Form_Password.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form_Reporting.resx">
+      <DependentUpon>Form_Reporting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form_WeighBridge.resx">
+      <DependentUpon>Form_WeighBridge.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Plate.resx">
+      <DependentUpon>Plate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form_BaggingToSAP.resx">
+      <DependentUpon>Form_BaggingToSAP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form_ListBagging.resx">
+      <DependentUpon>Form_ListBagging.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form_ListRaw.resx">
+      <DependentUpon>Form_ListRaw.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form_ListWB.resx">
+      <DependentUpon>Form_ListWB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form_Loading.resx">
+      <DependentUpon>Form_Loading.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form_Login.resx">
+      <DependentUpon>Form_Login.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form_Main.resx">
+      <DependentUpon>Form_Main.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form_MasterUser.resx">
+      <DependentUpon>Form_MasterUser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form_RawSugar.resx">
+      <DependentUpon>Form_RawSugar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form_Search.resx">
+      <DependentUpon>Form_Search.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Access">
+      <Guid>{4AFFC9A0-5F99-101B-AF4E-00AA003F0F07}</Guid>
+      <VersionMajor>9</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Access.Dao">
+      <Guid>{4AC9E1DA-5BAD-4AC7-86E3-24F4CDCECA28}</Guid>
+      <VersionMajor>12</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="logoPT BMM.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

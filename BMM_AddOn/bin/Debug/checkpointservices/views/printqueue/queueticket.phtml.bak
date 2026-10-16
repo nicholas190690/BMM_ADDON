@@ -1,0 +1,12 @@
+<div class="ticket">
+	<h3><p class="centered btm-border">PT REJOSO MANIS INDO<br>TIKET ANTRIAN</p></h3>
+	<p class="centered">
+		<h1 class="centered" style="font-size:50px;"><?php echo substr($queuenumber,-5); ?></h1>
+	</p>
+	<p class="btm-top">
+		<h3>&nbsp;PARKING AREA <?php echo $parkingarea; ?></h3>
+		<h3>&nbsp;PRINTED ON <?php echo date('d-M-Y H:i:s');?></h3>
+	</p>
+</div>
+		
+        

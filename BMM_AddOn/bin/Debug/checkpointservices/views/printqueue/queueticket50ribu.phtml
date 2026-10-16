@@ -1,0 +1,43 @@
+<div class="ticket">
+	<h3><p class="centered btm-border">PT REJOSO MANIS INDO<br>TIKET ANTRIAN</p></h3>
+	<p class="centered">
+		<h1 class="centered" style="font-size:50px;"><?php echo substr($queuenumber,-5); ?></h1>
+		
+	</p>
+	<p class="btm-top">
+		<?php 
+			$quotastatus = '';
+			if($quotacheck <=1200){
+				$quotastatus = 'TUKARKAN NOMOR ANTRIAN DI PABRIK UNTUK DAPAT Rp. 50.000';
+			}
+		?>
+		<table>
+			<tr>
+				<td><h3>URUTAN KEDATANGAN</h3></td>	
+				<td><?php echo $urutantruck; ?></td>
+			</tr>
+			<tr>
+				<td><h3>PARKING AREA</h3></td>	
+				<td><?php echo $parkingarea; ?></td>
+			</tr>
+			<tr>
+				<td><h3>SPTA</h3></td>	
+				<td><?php echo $spta; ?></td>
+			</tr>
+			<tr>
+				<td><h3>NOPOL</h3></td>	
+				<td><?php echo $nopol; ?></td>
+			</tr>
+			<tr><td colspan="2"><?php echo '<h3>'.$quotastatus.'</h3>'; ?></td></tr>
+			<tr><td colspan="2">&nbsp;</td><tr>
+			<tr><td>PETUGAS</td><td>PENERIMA</td><tr>
+			<tr><td colspan="2">&nbsp;</td><tr>
+			<tr><td colspan="2">&nbsp;</td><tr>
+			<tr><td>(.................)</td><td>(.................)</td><tr>
+			<tr style="border-top:1px solid;">
+				<td><h3>PRINTED ON</h3></td>	
+				<td><h3><?php echo date('d-M-Y H:i:s'); ?></h3></td>
+			</tr>
+		</table>
+	</p>
+</div>       

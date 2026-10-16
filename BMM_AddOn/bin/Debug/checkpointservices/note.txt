@@ -1,0 +1,61 @@
+Blitar, 15 April 2020 	Bismillahirrahmanirrahim.. 
+
+PROCEDURE YANG DIPANGGIL 
+	RMI_INSERT_SPTA_SUBSTATION, untuk panggil ini kasih pengecekan roll back 
+	validasi : SOL_SP_VALIDASI ('2','A',docentry)
+
+KETERANGAN FIELD : 
+	IN DOCNUM INTEGER , -- GENERATE DARI DOCNUM TERAKIR DI HARI YG SAMA + 1 / YYMMDDXXXX  <- XXXX RUNNING NUMBER 4 DIGIT
+	IN SOL_REGISTRASI NVARCHAR(20), -- data qr code <- Registration
+	IN BASEENTRY INTEGER, -- select DOCENTRY DARI KONTRAK DETAIL
+	IN BASELINE INTEGER , -- select LINENUMBER DARI KONTRAK DETAIL
+	IN SOL_QUANTITY INTEGER , -- data qr code <- WeighOut - WeighIn
+	IN SOL_STATUS VARCHAR , -- DEFAULT 'O' UNTUK TRANSPORTIR
+	IN SOL_NOPOL NVARCHAR(20) , data qr code <- VehicleNum
+	IN SOL_SUPIR NVARCHAR(50), data qr code <- DriverName
+	IN SOL_KENDARAAN NVARCHAR(20) , data qr code <- VehicleType
+	IN SOL_DATE DATE, data qr code <- delDate
+	IN SOL_EXPIRY DATE, data qr code <- delDate
+	IN SOL_SOURCE NVARCHAR(50), '9.1" <- DARI API
+	IN RMI_SUBSTATION VARCHAR(2), data qr code <- wbKdSubStation
+	IN RMI_DELIVERYNUM VARCHAR(25), data qr code <- delDocNum
+	IN RMI_DELIVERYDATE TIMESTAMP, data qr code <- delDate
+	IN RMI_WEIGHDELIVERYIN DECIMAL(18,2), data qr code <- WeighInTrans
+	IN RMI_WEIGHDELIVERYOUT DECIMAL(18,2),data qr code <- WeighOutTrans
+	IN RMI_DELIVERYTYPE VARCHAR(1), data qr code <- WeighType
+	IN RMI_SUBWEIGHNUM VARCHAR(20), data qr code <- wbDocNum
+	IN RMI_PRICE DECIMAL(18,2) 0 saja karena transportir tidak perlu harga
+	
+	
+	//dari procedure SOL_INSERT_SPTA 	
+	DOCENTRY,
+	DOCNUM, -- GENERATE DARI DOCNUM TERAKIR DI HARI YG SAMA + 1 / YYMMDDXXXX  <- XXXX RUNNING NUMBER 4 DIGIT
+	SOL_REGISTRASI, --REGISTER PETANI 
+	BASEENTRY, -- select DOCENTRY DARI KONTRAK DETAIL
+	BASELINE, -- select LINENUMBER DARI KONTRAK DETAIL
+	SOL_QUANTITY, 7000 
+	SOL_STATUS, --A 
+	SOL_NOPOL, --""
+	SOL_SUPIR, -- ""
+	SOL_KENDARAAN, ""
+	SOL_DATE, --> date('Y-m-d')
+	SOL_EXPIRY, --> date('Y-m-d') + 1 
+	SOL_CREATEDATE, --> date('Y-m-d')
+	SOL_SOURCE, --> 'api'
+	SOL_APPROVE_TIMESTAMP date('Ymdhis')	
+	
+	
+DATA TESTING API 
+	REGISTER 	: 1900000003
+	KTP 	 	: 3505161010700005
+	NAME 	 	: BUDIONO 
+	NO KONTRAK 	: 200400001
+	
+//insert ke pos pantau 
+CALL RMI_INSERT_POS ('1908200182','IN','00009')
+
+CALL RMI_INSERT_POS (nomorspta,'IN'/'OUT', kode pos pantau)	
+
+DATA TESTING USER 
+	
+	

@@ -1,0 +1,281 @@
+<?php
+namespace Zircon\Modules\Checkpointservices\Controllers;
+
+use Zircon\Modules\Checkpointservices\Models\{SymmetricEncryption as encdec,OUuser};
+use Zircon\Modules\Checkpointservices\Models\{InvalidHashException,CannotPerformOperationException,PasswordStorage};
+use Zircon\Modules\Checkpointservices\Models\{AES,Spta,Syncronize};
+
+class UpdatesptaController extends ControllerBase
+{
+	
+	public function indexAction()
+	{
+		$tokensts=$this->apiHelper->tokenCheck();
+		try{
+			if($tokensts){
+				
+				if($this->request->isPost()){
+					//echo 'OKE';die;
+					//---do update here 
+					$vehicle_no		= $this->request->getPost('vehicle_no');
+					$driver_name 	= $this->request->getPost('driver_name');
+					$vehicle_type	= $this->request->getPost('vehicle_type');
+					$spta_num		= $this->request->getPost('harvesting_ticket');
+					$checkpoint     = $this->request->getPost('checkpoint');
+					$brix           = $this->request->getPost('brix');
+					
+					$longitude  	= $this->request->getPost('longitude');
+					$latitude		= $this->request->getPost('latitude');
+					$location		= $this->request->getPost('location');
+					
+					//echo '<pre>';
+					//print_r($_POST);
+					//echo '</pre>';
+					//die('_DIE_');
+					$sync = new Syncronize();
+					$isUploaded=TRUE;
+					$imagecheck=FALSE;
+					if($this->request->hasFiles()==TRUE){
+						$images     = $this->request->getUploadedFiles();
+						$isUploaded = false;
+					}else{
+						$isUploaded=true;
+						$imagecheck=FALSE;
+						$images='';
+						$msglog=['msg'=>'No file(s) sent. You must choose at least one file to send. Please try again.'];
+					}
+					
+							
+										
+					if($vehicle_no && $driver_name && $vehicle_type && $spta_num && $brix){
+						//echo "0";
+						#//
+						# Cek entry SPTA u/ adanya upload gambar
+						#						
+						$recs = $sync->showsptadata($spta_num,'harvesting_ticket',date('Ymd'));
+						
+						
+						//echo "<pre>";
+						//print_r($recs);
+						//echo "</pre>";
+						//exit;
+						
+						if($isUploaded){
+							if(count($recs) > 0){
+								$brixcheck = isset($recs[0]['images']['brix'])
+											?$recs[0]['images']['brix']
+											:'';
+								$truckcheck	= isset($recs[0]['images']['truck'])
+											?$recs[0]['images']['truck']
+											:'';		
+								if($brixcheck=='' && $truckcheck==''){
+									$imagecheck=FALSE;
+									//$msglog=['msg'=>'No file(s) sent. You must choose at least one file to send. Please try again.'];
+								}else{
+									$imagecheck=TRUE;
+								}
+							}
+						}else{
+							$imagecheck=FALSE;
+						}						
+						#// end cek entry SPTA
+						
+						if(!$imagecheck){
+							$mobspta=new Spta();
+							$mobspta->updateSPTA($vehicle_no,$driver_name,$vehicle_type,$spta_num,$brix);
+							
+							$yearmod=date('Y');
+							$path_upload=$yearmod.'/'.$spta_num[2].$spta_num[3].'/'.$spta_num[4].$spta_num[5];
+							$dir='spta_upload/'.$path_upload;
+							if(!file_exists($dir) and !is_dir($dir))
+							{				
+								mkdir($dir,0775,true);							
+							}
+													
+							$imgname=[];
+							#isset($images);
+							if($images){
+								foreach($images as $key=>$image)
+								{
+									$filling=['brix','truck'];
+									if(strpos($image->getname(),$filling[0])!==FALSE)
+									{
+										$newname=$filling[$key].'_'.$spta_num.'.'.$image->getExtension();
+									}
+									
+									if(strpos($image->getname(),$filling[1])!==FALSE)
+									{
+										$newname=$filling[$key].'_'.$spta_num.'.'.$image->getExtension();
+									}
+									$imgname[$key]=$newname;
+									$ul=$dir.'/'.$imgname[$key];
+									($image->moveTo($ul))?$isUploaded = true:$isUploaded = false;
+									($isUploaded)?$msglog[$key]=['m-'.$key=>$newname.' is uploaded.']:$msglog[$key]=['m-'.$key=>$newname.' some error occurred.'];
+								}
+							}						
+							
+							$arr = [
+								'vehicle_no' => $vehicle_no,
+								'driver_name' => $driver_name,
+								'vehicle_type' => $vehicle_type,
+								'spta_num' => $spta_num,
+								'brix' => $brix,
+							];
+							
+							
+							if($this->checkUpdate($arr))
+							{
+								$cptransaction = $sync->savecheckpoint($spta_num,'OUT',$checkpoint,$longitude,$latitude,$location);
+								
+								if($cptransaction=='ok'){
+									$status=[
+										'code'=>'200',
+										'sts'=>'Success'
+									];							
+									
+									/*$messagedt=['data'=> $spta_num.' updated',
+										'msglog'=>$msglog];*/
+									//alter by udin untuk return data SPTA 	
+									$recs = $sync->showsptadata($spta_num,'harvesting_ticket',date('Ymd'));
+									$messagedt	= ['data' => $recs];	
+								}else{
+									$status=[
+										'code'=>'400',
+										'sts'=>'Bad Request'
+									];
+									$messagedt=['message'=>'The server could not understand the request due to invalid syntax.'];
+								}
+							}else{
+								//reup
+								echo "1";
+								
+								$status=[
+									'code'=>'412',
+									'sts'=>'Precondition Failed'
+								];
+								$messagedt=['message'=>'The client has indicated preconditions in its headers which the server does not meet.'];
+							}
+						}else{
+							$mobspta=new Spta();
+							$mobspta->updateSPTA($vehicle_no,$driver_name,$vehicle_type,$spta_num,$brix);
+							
+							$arr = [
+								'vehicle_no' => $vehicle_no,
+								'driver_name' => $driver_name,
+								'vehicle_type' => $vehicle_type,
+								'spta_num' => $spta_num,
+								'brix' => $brix,
+							];
+							
+							
+							if($this->checkUpdate($arr))
+							{
+								$cptransaction = $sync->savecheckpoint($spta_num,'OUT',$checkpoint,$longitude,$latitude,$location);
+								
+								if($cptransaction=='ok'){
+									$status=[
+										'code'=>'200',
+										'sts'=>'Success'
+									];							
+									
+									/*$messagedt=['data'=> $spta_num.' updated',
+										'msglog'=>$msglog];*/
+									//alter by udin untuk return data SPTA 	
+									$recs = $sync->showsptadata($spta_num,'harvesting_ticket',date('Ymd'));
+									$messagedt	= ['data' => $recs];	
+								}else{
+									$status=[
+										'code'=>'400',
+										'sts'=>'Bad Request'
+									];
+									$messagedt=['message'=>'The server could not understand the request due to invalid syntax.'];
+								}
+							}else{
+								//echo "2";
+								//reup
+								$status=[
+									'code'=>'412',
+									'sts'=>'Precondition Failed'
+								];
+								$messagedt=['message'=>'The client has indicated preconditions in its headers which the server does not meet.'];
+							}
+						}						
+					}else{
+						$status=[
+							'code'=> '404',
+							'sts'=>'not found'
+							];
+						$messagedt=['message'=>'parameter not completed'];	
+					}					
+				}else{
+					$status=[
+							'code'=> '404',
+							'sts'=>'Not Found'
+							];
+					$messagedt=['message'=>'Route is not defined'];	
+				}
+				
+			}else{
+				$status=[
+					'code'=>'401',
+					'sts'=>'Unauthorized'
+				];
+				$messagedt=['message'=>'No token supplied or token is not valid'];
+			}
+			$ret=$this->apiHelper->setJsonResponse($messagedt,$status);
+			$this->apiHelper->getJsonResponse($ret);
+		}catch(Exception $e){
+			$status=[
+				'code'=>$e->code,
+				'sts'=>$e->message,
+			];
+			$messagedt=['message'=>'Error'];
+			$ret=$this->apiHelper->setJsonResponse($messagedt,$status);
+			$ret=str_replace('null','""',$ret);
+			$this->apiHelper->getJsonResponse($ret);
+		}
+		//disabling view 
+		
+		$this->view->disable();	
+	}
+	
+	private function sptaUpdate($vehicle_no,$driver_name,$vehicle_type,$spta_num)
+	{
+		$mobspta=new Spta();
+		$mobspta->updateSPTA($vehicle_no,$driver_name,$vehicle_type,$spta_num);
+		
+		return TRUE;
+	}
+	
+	public function checkUpdate($arr)
+	{
+		$sync=new Syncronize();
+		$isUpdated=FALSE;
+		
+		//Retrieve SPTA row from db;
+		$recs=$sync->showsptadata($arr['spta_num'],'harvesting_ticket',date('Ymd'));
+		
+		if(count($recs) > 0){
+			/*echo '<pre>';
+			print_r($recs);
+			echo '</pre>';
+			echo '<pre>';
+			print_r($arr);
+			echo '</pre>';
+			die('_SKIP_');*/
+			if(($arr['vehicle_no'] == $recs[0]['police_number']) 
+				&& ($arr['driver_name'] == $recs[0]['driver'])
+				&& ($arr['brix'] == $recs[0]['brix'])
+				&& ($arr['vehicle_type'] == $recs[0]['vehicle_type'])	
+			){
+				$isUpdated=TRUE;
+			}else{
+				$isUpdated=FALSE;
+			}
+		}else{
+			$isUpdated=FALSE;
+		}
+		return $isUpdated;
+	}
+	
+}

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ADDON_CONFIGURATION xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CONFIGURATION>
+    <APPLICATION>
+      <PASSWORD>
+      </PASSWORD>
+      <PORT_NAME>COM5</PORT_NAME>
+      <BAUD_RATE>9600</BAUD_RATE>
+      <DATA_BITS>8</DATA_BITS>
+      <READ_TIMEOUT>1000</READ_TIMEOUT>
+      <SEPARATOR>0</SEPARATOR>
+      <PathMDB>C:\Database\</PathMDB>
+      <ItemIssueCode>RM101</ItemIssueCode>
+      <ItemIssueName>RAW SUGAR</ItemIssueName>
+      <ItemReceiptCode>FG101</ItemReceiptCode>
+      <ItemReceiptName>WHITE SUGAR R1</ItemReceiptName>
+      <TipeIssue>100</TipeIssue>
+      <TipeReceipt>050</TipeReceipt>
+      <StartID>6800</StartID>
+      <Timbangan>Timbangan R</Timbangan>
+      <PathBag>C:\Bagging\</PathBag>
+      <Menu>All</Menu>
+      <ReportPath>D:\Work\bmm\BMM_AddOn2\BMM_AddOn\BMM_AddOn\bin\Debug</ReportPath>
+      <PrinterDotMatrix>Adobe PDF</PrinterDotMatrix>
+      <PrinterThermal>CITIZEN CT-S310II</PrinterThermal>
+      <PathTimbanganR>C:\DataSource\R\</PathTimbanganR>
+      <PathTimbanganL>C:\DataSource\L\</PathTimbanganL>
+    </APPLICATION>
+    <SBO_DATABASE>
+      <NAME>SBO</NAME>
+      <SERVER_NAME>192.168.1.5</SERVER_NAME>
+      <PORT>30015</PORT>
+      <DATABASE_USER_NAME>SYSTEM</DATABASE_USER_NAME>
+      <DATABASE_PASSWORD>SrNXddu2PJd/kgp/1mTijg==</DATABASE_PASSWORD>
+      <DATABASE_SERVER_TYPE>HANA</DATABASE_SERVER_TYPE>
+      <SBO_DATABASE_NAME>BMM_LIVE</SBO_DATABASE_NAME>
+      <SBO_USER_NAME>manager</SBO_USER_NAME>
+      <SBO_PASSWORD>fPhVgOLEKBc=</SBO_PASSWORD>
+      <SBO_LICENSE_SERVER>192.168.1.5:40000</SBO_LICENSE_SERVER>
+      <SBO_ADDON_IDENTIFIER>
+      </SBO_ADDON_IDENTIFIER>
+    </SBO_DATABASE>
+    <HANA_DATABASE>
+      <NAME>HANA</NAME>
+      <SERVER_NAME>192.168.1.5</SERVER_NAME>
+      <PORT>30015</PORT>
+      <DATABASE_NAME>BMM_LIVE</DATABASE_NAME>
+      <USER_NAME>SYSTEM</USER_NAME>
+      <PASSWORD>SrNXddu2PJd/kgp/1mTijg==</PASSWORD>
+    </HANA_DATABASE>
+  </CONFIGURATION>
+</ADDON_CONFIGURATION>
